@@ -30,6 +30,9 @@ public class SecurityConfig {
     private final UserService userService; // Inyecta tu UserService
     private final PasswordEncoder passwordEncoder;
 
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, UserService userService,
             PasswordEncoder passwordEncoder) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -52,7 +55,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://172.17.0.6:5173"); // tu frontend
+        config.addAllowedOrigin(frontendUrl); // tu frontend
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
