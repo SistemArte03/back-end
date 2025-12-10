@@ -57,10 +57,10 @@ public class AuthController {
         // 🍪 Crear cookie segura
         ResponseCookie cookie = ResponseCookie.from("jwt", token)
                 .httpOnly(true) // 🔒 JavaScript NO puede leerla
-                .secure(false) // 🔒 Solo viaja por HTTPS (en local puedes poner false)
+                .secure(true) // 🔒 Solo viaja por HTTPS (en local puedes poner false)
                 .path("/") // Disponible en toda la app
                 .maxAge(60 * 60) // 1 hora
-                .sameSite("Lax") // 🔒 Previene CSRF básico
+                .sameSite("None") // 🔒 Previene CSRF básico
                 .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
